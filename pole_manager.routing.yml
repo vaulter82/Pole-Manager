@@ -1,0 +1,6 @@
+pole_manager.checkout_confirm_form:
+  path: '/poles/checkout/confirm'
+  defaults:
+    _form: '\Drupal\pole_manager\Form\CheckoutConfirmForm'
+  requirements:
+    _permission: 'administer pole entity entities'

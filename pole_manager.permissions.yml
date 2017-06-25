@@ -1,0 +1,22 @@
+add pole entity entities:
+  title: 'Create new Pole entity entities'
+
+administer pole entity entities:
+  title: 'Administer Pole entity entities'
+  description: 'Allow to access the administration form to configure Pole entity entities.'
+  restrict access: true
+
+delete pole entity entities:
+  title: 'Delete Pole entity entities'
+
+edit pole entity entities:
+  title: 'Edit Pole entity entities'
+
+access pole entity overview:
+  title: 'Access the Pole entity overview page'
+
+view published pole entity entities:
+  title: 'View published Pole entity entities'
+
+view unpublished pole entity entities:
+  title: 'View unpublished Pole entity entities'

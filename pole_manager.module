@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Contains pole_manager.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function pole_manager_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the pole_manager module.
+    case 'help.page.pole_manager':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('A module to manage the Pole database for club') . '</p>';
+      return $output;
+
+    default:
+  }
+}

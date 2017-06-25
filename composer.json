@@ -1,0 +1,14 @@
+{
+  "name": "drupal/pole_manager",
+  "type": "drupal-module",
+  "description": "A module to manage the Pole database for club",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/pole_manager",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/pole_manager",
+    "source": "http://cgit.drupalcode.org/pole_manager"
+  },
+  "require": { }
+}

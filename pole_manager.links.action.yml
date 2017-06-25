@@ -1,0 +1,5 @@
+entity.pole_entity.add_form:
+  route_name: entity.pole_entity.add_form
+  title: 'Add Pole entity'
+  appears_on:
+    - entity.pole_entity.collection

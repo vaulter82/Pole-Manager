@@ -1,0 +1,14 @@
+
+# Pole entity menu items definition
+entity.pole_entity.collection:
+  title: 'Pole entity list'
+  route_name: entity.pole_entity.collection
+  description: 'List Pole entity entities'
+  parent: system.admin_structure
+  weight: 100
+
+pole_entity.admin.structure.settings:
+  title: Pole entity settings
+  description: 'Configure Pole entity entities'
+  route_name: pole_entity.settings
+  parent: system.admin_structure

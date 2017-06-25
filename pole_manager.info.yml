@@ -1,0 +1,5 @@
+name: Pole Manager
+type: module
+description: A module to manage the Pole database for club
+core: 8.x
+package: Custom

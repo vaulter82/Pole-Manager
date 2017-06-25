@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - pole_manager
+id: checkout_pole
+label: 'Checkout poles'
+type: pole_entity
+plugin: checkout_pole
+configuration: { }
