@@ -46,7 +46,7 @@ class CheckoutConfirmForm extends ConfirmFormBase {
   }
 
   public function buildForm( array $form, FormStateInterface $form_state ) {
-    $this->poles = $this->tempStoreFactory->get('checkout_confirm_form')->get(\Drupal::currentUser()->id());
+    $this->poleInfo = $this->tempStoreFactory->get('checkout_confirm_form')->get(\Drupal::currentUser()->id());
 
     if( empty($this->poleInfo) ) {
       return new RedirectResponse($this->getCancelUrl()->setAbsolute()->toString());
