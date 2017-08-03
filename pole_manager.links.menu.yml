@@ -4,7 +4,7 @@ entity.pole_entity.collection:
   title: 'Pole entity list'
   route_name: entity.pole_entity.collection
   description: 'List Pole entity entities'
-  parent: system.admin_structure
+  parent: system.admin_content
   weight: 100
 
 pole_entity.admin.structure.settings:
