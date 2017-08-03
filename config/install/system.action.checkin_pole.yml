@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - pole_manager
+id: checkin_pole
+label: 'Check-in poles'
+type: pole_entity
+plugin: checkin_pole
+configuration: { }
