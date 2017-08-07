@@ -1,0 +1,6 @@
+qr:
+  version: 1.x
+  js:
+    js/qr.js
+  dependencies:
+    - core/jquery
