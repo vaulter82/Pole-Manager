@@ -1,6 +1,7 @@
 qr:
   version: 1.x
   js:
+    js/quagga.min.js
     js/qr.js
   dependencies:
     - core/jquery
