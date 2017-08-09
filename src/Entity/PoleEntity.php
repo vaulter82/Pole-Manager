@@ -314,6 +314,9 @@ class PoleEntity extends ContentEntityBase implements PoleEntityInterface {
       ))
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
+    
+    $fields['checkout_date'] = BaseFieldDefinition::create('datetime')
+      ->setLabel(t('Checkout Date'));
 
     $fields['status'] = BaseFieldDefinition::create('boolean')
       ->setLabel(t('Publishing status'))
