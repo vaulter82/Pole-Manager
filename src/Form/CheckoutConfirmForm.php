@@ -91,7 +91,9 @@ class CheckoutConfirmForm extends ConfirmFormBase {
       $uid = $form_state->getValue('club_member');
 
       foreach( $poles as $pole ) {
-        $pole->setOwnerId($uid)->save();
+        $pole->setOwnerId($uid);
+        $pole->checkout_date->value = time();
+        $pole->save();
 
         $total_count++;
       }
