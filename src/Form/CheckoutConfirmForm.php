@@ -33,6 +33,10 @@ class CheckoutConfirmForm extends ConfirmFormBase {
     return 'checkout_confirm_form';
   }
 
+  public function getDescription() {
+    return '';
+  }
+
   public function getQuestion() {
     return 'Checkout poles';
   }
@@ -54,12 +58,26 @@ class CheckoutConfirmForm extends ConfirmFormBase {
 
     $poles = $this->storage->loadMultiple( array_keys($this->poleInfo) );
 
-    //$form['club_member'] = 
+    $form['club_member'] = [
+      '#type' => 'entity_autocomplete',
+      '#target_type' => 'user',
+      '#selection_settings' => ['include_anonymous' => FALSE],
+      '#title' => $this->t('Club Member'),
+      '#required' => TRUE,
+    ];
 
     $form['poles'] = [
-      '#theme' => 'item_list',
-      '#items' => $poles,
+      '#type' => 'details',
+      '#title' => $this->t('Selected poles'),
+      '#open' => TRUE,
     ];
+
+    foreach( $this->poleInfo as $id => $pole ) {
+      $form['poles'][$id] = [
+        '#type' => 'item',
+        '#markup' => $this->t('<li>@label</li>', ['@label' => $pole->label()]),
+      ];
+    }
 
     $form = parent::buildForm($form, $form_state);
 
@@ -69,12 +87,18 @@ class CheckoutConfirmForm extends ConfirmFormBase {
   public function submitForm( array &$form, FormStateInterface $form_state ) {
     if( $form_state->getValue('confirm') && !empty($this->poleInfo) ) {
       $poles = $this->storage->loadMultiple( array_keys($this->poleInfo) );
+      $total_count = 0;
+      $uid = $form_state->getValue('club_member');
 
       foreach( $poles as $pole ) {
-        $pole->notes->value = "checked out";
+        $pole->setOwnerId($uid)->save();
+
+        $total_count++;
       }
 
       drupal_set_message($this->formatPlural($total_count, 'Checked out 1 pole.', '@count poles were checked out.'));
+
+      $this->tempStoreFactory->get('checkout_confirm_form')->delete(\Drupal::currentUser()->id());
     }
 
     $form_state->setRedirect('system.admin_content');

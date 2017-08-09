@@ -16,7 +16,7 @@ use Drupal\user\UserInterface;
  *
  * @ContentEntityType(
  *   id = "pole_entity",
- *   label = @Translation("Pole entity"),
+ *   label = @Translation("Pole"),
  *   handlers = {
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
  *     "list_builder" = "Drupal\pole_manager\PoleEntityListBuilder",
@@ -44,11 +44,11 @@ use Drupal\user\UserInterface;
  *     "status" = "status",
  *   },
  *   links = {
- *     "canonical" = "/poles/pole_entity/{pole_entity}",
- *     "add-form" = "/poles/pole_entity/add",
- *     "edit-form" = "/poles/pole_entity/{pole_entity}/edit",
- *     "delete-form" = "/poles/pole_entity/{pole_entity}/delete",
- *     "collection" = "/poles/pole_entity",
+ *     "canonical" = "/poles/pole/{pole_entity}",
+ *     "add-form" = "/poles/add",
+ *     "edit-form" = "/poles/pole/{pole_entity}/edit",
+ *     "delete-form" = "/poles/pole/{pole_entity}/delete",
+ *     "collection" = "/poles/collection",
  *   },
  *   field_ui_base_route = "pole_entity.settings"
  * )
@@ -149,8 +149,8 @@ class PoleEntity extends ContentEntityBase implements PoleEntityInterface {
     $fields = parent::baseFieldDefinitions($entity_type);
 
     $fields['user_id'] = BaseFieldDefinition::create('entity_reference')
-      ->setLabel(t('Authored by'))
-      ->setDescription(t('The user ID of author of the Pole entity entity.'))
+      ->setLabel(t('Checked out by'))
+      ->setDescription(t('The club member that currently has this pole checked out.'))
       ->setRevisionable(TRUE)
       ->setSetting('target_type', 'user')
       ->setSetting('handler', 'default')

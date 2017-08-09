@@ -1,5 +1,5 @@
 qr:
   version: 1.x
   js:
-    js/quagga.min.js
-    js/qr.js
+    js/quagga.min.js: {}
+    js/qr.js: {}

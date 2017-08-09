@@ -38,7 +38,11 @@ class CheckoutPole extends ActionBase implements ContainerFactoryPluginInterface
   }
 
   public function executeMultiple(array $entities) {
-    $this->tempStore->set($this->currentUser->id(), $entities);
+    $poles = [];
+    foreach( $entities as $pole ) {
+      $poles[$pole->id()] = $pole;
+    }
+    $this->tempStore->set($this->currentUser->id(), $poles);
   }
 
   public function execute($entity = NULL) {

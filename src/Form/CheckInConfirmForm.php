@@ -10,7 +10,7 @@ use Drupal\user\PrivateTempStoreFactory;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
-class CheckoutConfirmForm extends ConfirmFormBase {
+class CheckInConfirmForm extends ConfirmFormBase {
   protected $poleInfo = [];
   protected $tempStoreFactory;
   protected $manager;
@@ -30,6 +30,10 @@ class CheckoutConfirmForm extends ConfirmFormBase {
   public function getFormId() {
     return 'checkin_confirm_form';
   }
+
+  public function getDescription() {
+    return '';
+  }
   
   public function getQuestion() {
     return 'Check-in poles';
@@ -45,27 +49,47 @@ class CheckoutConfirmForm extends ConfirmFormBase {
   
   public function buildForm( array $form, FormStateInterface $form_state ) {
     $this->poleInfo = $this->tempStoreFactory->get('checkin_confirm_form')->get(\Drupal::currentUser()->id());
+
     if( empty($this->poleInfo) ) {
       return new RedirectResponse($this->getCancelUrl()->setAbsolute()->toString());
     }
+
     $poles = $this->storage->loadMultiple( array_keys($this->poleInfo) );
-    //$form['club_member'] = 
+
     $form['poles'] = [
-      '#theme' => 'item_list',
-      '#items' => $poles,
+      '#type' => 'details',
+      '#title' => $this->t('Selected poles'),
+      '#open' => TRUE,
     ];
+
+    foreach( $this->poleInfo as $id => $pole ) {
+      $form['poles'][$id] = [
+        '#type' => 'item',
+        '#markup' => $this->t('<li>@label</li>', ['@label' => $pole->label()]),
+      ];
+    }
+
     $form = parent::buildForm($form, $form_state);
+
     return $form;
   }
   
   public function submitForm( array &$form, FormStateInterface $form_state ) {
     if( $form_state->getValue('confirm') && !empty($this->poleInfo) ) {
       $poles = $this->storage->loadMultiple( array_keys($this->poleInfo) );
+      $total_count = 0;
+
       foreach( $poles as $pole ) {
-        $pole->notes->value = "checked out";
+        $pole->setOwnerId(4)->save();
+
+        $total_count++;
       }
-      drupal_set_message($this->formatPlural($total_count, 'Checked out 1 pole.', '@count poles were checked out.'));
+
+      drupal_set_message($this->formatPlural($total_count, 'Checked in 1 pole.', '@count poles were checked in.'));
+
+      $this->tempStoreFactory->get('checkin_confirm_form')->delete(\Drupal::currentUser()->id());
     }
+
     $form_state->setRedirect('system.admin_content');
   }
 }
