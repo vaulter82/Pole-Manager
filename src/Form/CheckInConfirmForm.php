@@ -80,7 +80,9 @@ class CheckInConfirmForm extends ConfirmFormBase {
       $total_count = 0;
 
       foreach( $poles as $pole ) {
-        $pole->setOwnerId(4)->save();
+        $pole->setOwnerId(4);
+        $pole->checkout_date->value = null;
+        $pole->save();
 
         $total_count++;
       }

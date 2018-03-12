@@ -10,5 +10,7 @@
     "issues": "https://www.drupal.org/project/issues/pole_manager",
     "source": "http://cgit.drupalcode.org/pole_manager"
   },
-  "require": { }
+  "require": {
+    "khanamiryan/qrcode-detector-decoder": "^1.0"
+  }
 }
