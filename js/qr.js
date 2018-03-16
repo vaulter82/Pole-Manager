@@ -8,12 +8,14 @@
     });
   }
   
-  $('body').append('<button id="initialize_scan" onclick="init()" style="position:fixed;bottom:15px;right:15px;height:30px;width:30px;">Scan</button>');
+  $('body').append('<button id="initialize_scan_button" style="position:fixed;bottom:15px;right:15px;height:30px;width:30px;">Scan</button>');
   $('body').append('<canvas id="pole_manager_code_reader_canvas" style="display:none;position:fixed;height:100%;width:100%"></canvas>');
   
   var video = document.createElement("video");
   var canvasElement = document.getElementById("pole_manager_code_reader_canvas");
   var canvas = canvasElement.getContext("2d");
+  
+  document.getElementById("initialize_scan_button").onclick = init;
   
   function drawLine(begin, end, color) {
     canvas.beginPath();
