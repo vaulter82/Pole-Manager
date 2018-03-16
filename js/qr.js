@@ -47,9 +47,9 @@
         drawLine(code.location.bottomLeftCorner, code.location.bottomRightCorner, "#FF3B58");
         drawLine(code.location.topLeftCorner, code.location.bottomleftCorner, "#FF3B58");
 
-        message.innerText = code.data;
+        message.innerHTML = code.data;
       } else {
-        
+
       }
     }
 
