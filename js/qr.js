@@ -1,11 +1,4 @@
 (function($, Drupal) {
-  $('body').append('<button id="initialize_scan" onclick="init()" style="position:fixed;bottom:15px;right:15px;height:30px;width:30px;">Scan</button>');
-  $('body').append('<div id="pole_manager_code_reader_canvas" style="display:none;position:fixed;height:100%;width:100%">');
-  
-  var video = document.createElement("video");
-  var canvasElement = document.getElementById("pole_manager_code_reader_canvas");
-  var canvas = canvasElement.getContext("2d");
-  
   function init() {
     navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } }).then(function(stream) {
       video.srcObject = stream;
@@ -14,6 +7,13 @@
       requestAnimationFrame(tick);
     });
   }
+  
+  $('body').append('<button id="initialize_scan" onclick="init()" style="position:fixed;bottom:15px;right:15px;height:30px;width:30px;">Scan</button>');
+  $('body').append('<div id="pole_manager_code_reader_canvas" style="display:none;position:fixed;height:100%;width:100%">');
+  
+  var video = document.createElement("video");
+  var canvasElement = document.getElementById("pole_manager_code_reader_canvas");
+  var canvas = canvasElement.getContext("2d");
   
   function drawLine(begin, end, color) {
     canvas.beginPath();
