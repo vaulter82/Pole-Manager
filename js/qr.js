@@ -45,7 +45,7 @@
         drawLine(code.location.topLeftCorner, code.location.topRightCorner, "#FF3B58");
         drawLine(code.location.topRightCorner, code.location.bottomRightCorner, "#FF3B58");
         drawLine(code.location.bottomLeftCorner, code.location.bottomRightCorner, "#FF3B58");
-        drawLine(code.location.topLeftCorner, code.location.bottomleftCorner, "#FF3B58");
+        drawLine(code.location.topLeftCorner, code.location.bottomLeftCorner, "#FF3B58");
 
         message.innerHTML = code.data;
       } else {
