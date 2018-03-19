@@ -41,7 +41,8 @@
 
   function tick() {
     if( video.readyState === video.HAVE_ENOUGH_DATA && !video.paused ) {
-      initializeButton.style.display = "none";
+      $('body > :not(#pole_manager_code_reader_container)').hide();
+      
       container.style.display = "initial";
       canvasElement.height = video.videoHeight;
       canvasElement.width = video.videoWidth;
@@ -64,7 +65,8 @@
       }
     } else {
       container.style.display = "none";
-      initializeButton.style.display = "initial";
+      
+      $('body > :not(#pole_manager_code_reader_container)').show();
     }
 
     requestAnimationFrame(tick);
