@@ -16,6 +16,7 @@ class PoleBulkForm extends BulkForm {
     public function viewsForm(&$form, FormStateInterface $form_state) {
         parent::viewsForm($form, $form_state);
 
+        $form['#attached']['library'][] = 'pole_manager/font-awesome';
         $form['#attached']['library'][] = 'pole_manager/qr';
     }
 }
