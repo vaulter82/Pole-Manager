@@ -1,13 +1,14 @@
 font-awesome:
   remote: https://fontawesome.com
-  version: 4.7.0
+  version: 5.0.8
   license:
     name: MIT
     url: https://fontawesome.com/license
     gpl-compatible: true
   css:
-    https://use.fontawesome.com/releases/v5.0.8/css/solid.css: { type: external }
-    https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css: { type: external }
+    theme:
+      https://use.fontawesome.com/releases/v5.0.8/css/solid.css: { type: external }
+      https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css: { type: external }
 
 qr:
   version: 1.x
