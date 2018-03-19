@@ -15,3 +15,6 @@ qr:
   js:
     js/jsQR.js: {}
     js/qr.js: {}
+  css:
+    theme:
+      css/qr.css: {}
