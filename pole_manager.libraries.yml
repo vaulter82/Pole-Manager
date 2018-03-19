@@ -1,13 +1,13 @@
 font-awesome:
-  remote: https://fortawesome.github.io/Font-Awesome/
-  version: 4.5.0
+  remote: https://fontawesome.com
+  version: 4.7.0
   license:
     name: MIT
-    url: https://fortawesome.github.io/Font-Awesome/license/
+    url: https://fontawesome.com/license
     gpl-compatible: true
   css:
-    theme:
-      https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css: { type: external, minified: true }
+    https://use.fontawesome.com/releases/v5.0.8/css/solid.css: { type: external }
+    https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css: { type: external }
 
 qr:
   version: 1.x
