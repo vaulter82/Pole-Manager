@@ -11,3 +11,9 @@ pole_manager.checkin_confirm_form:
     _form: '\Drupal\pole_manager\Form\CheckInConfirmForm'
   requirements:
     _permission: 'administer pole entity entities'
+pole_manager.qrcode:
+  path: '/poles/decode/{image}'
+  defaults:
+    _controller: '\Drupal\pole_manager\Controller\QRCodeController::decode'
+  requirements:
+    _permission: 'administer pole entity entities'
