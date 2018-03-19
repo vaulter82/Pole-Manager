@@ -13,7 +13,7 @@
   }
   
   $('body').append('<div id="pole_manager_code_reader_container" style="display:none;position:fixed;top:0;left:0;height:100%;width:100%;"></div>');
-  $('body').append('<button id="initialize_scan_button" class="pole_manager_code_reader_button" style="position:fixed;bottom:15px;right:15px;"><i class="fas fa-camera"></i></button>');
+  $('body').append('<button id="initialize_scan_button" class="pole_manager_code_reader_button" style="position:fixed;bottom:15px;right:15px;"><i class="fas fa-camera fa-lg"></i></button>');
 
   $('#pole_manager_code_reader_container').append('<button id="pole_manager_code_reader_close_button" class="pole_manager_code_reader_button"><i class="fas fa-times"></i></button>');
   $('#pole_manager_code_reader_container').append('<canvas id="pole_manager_code_reader_canvas"></canvas>');
