@@ -21,6 +21,7 @@
   width: 100%;
   background: rgb(117,117,117);
   color: white;
+  overflow-y: scroll;
 }
 
 button.pole_manager_code_reader_button {
