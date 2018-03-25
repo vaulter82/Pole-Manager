@@ -71,7 +71,7 @@
           var checkbox = serialNumberTD.parent().find("input[type=checkbox]");
           checkbox.checked = !checkbox.checked;
 
-          if( !$(message).find(':contains(' + info["Serial Number"] + ')') ) {
+          if( $(message).find(':contains(' + info["Serial Number"] + ')').length == 0 ) {
             $(message).append('<p>' + info["Length"] + '    ' + info["Weight"] + '    ' + info["Flex"] + '</p>'); //make message into table?
           }
         }
