@@ -7,11 +7,11 @@
       requestAnimationFrame(tick);
     });
   }
-  
+
   function dinit() {
     video.pause();
   }
-  
+
   $('body').append('<div id="pole_manager_code_reader_container" style="display:none;position:fixed;top:0;left:0;height:100%;width:100%;"></div>');
   $('body').append('<button id="initialize_scan_button" class="pole_manager_code_reader_button" style="position:fixed;bottom:15px;right:15px;height:50px;width:50px;"><i class="fas fa-camera fa-lg"></i></button>');
 
@@ -42,7 +42,7 @@
   function tick() {
     if( video.readyState === video.HAVE_ENOUGH_DATA && !video.paused ) {
       $('body > :not(#pole_manager_code_reader_container)').hide();
-      
+
       container.style.display = "initial";
       canvasElement.height = video.videoHeight;
       canvasElement.width = video.videoWidth;
@@ -57,15 +57,30 @@
         drawLine(code.location.bottomLeftCorner, code.location.bottomRightCorner, "#FF3B58");
         drawLine(code.location.topLeftCorner, code.location.bottomLeftCorner, "#FF3B58");
 
-        if( $(message).find(':contains(' + code.data + ')') ) {
-          $(message).append('<p>' + code.data + '</p>');
+        var info = {};
+        var data = code.data.split("|");
+
+        for( var i in data ) {
+          var t = data[i].split(":");
+          info[t[0]] = t[1];
+        }
+
+        var serialNumberTD = $(".views-field-serial-number:contains(" + info["Serial Number"] + ")");
+
+        if( serialNumberTD ) {
+          var checkbox = serialNumberTD.parent().find("input[type=checkbox]");
+          checkbox.checked = !checkbox.checked;
+
+          if( $(message).find(':contains(' + code.data + ')') ) {
+            $(message).append('<p>' + code.data + '</p>');
+          }
         }
       } else {
 
       }
     } else {
       container.style.display = "none";
-      
+
       $('body > :not(#pole_manager_code_reader_container)').show();
     }
 
