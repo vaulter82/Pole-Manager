@@ -68,7 +68,7 @@
         var serialNumberTD = $(".views-field-serial-number:contains(" + info["Serial Number"] + ")");
 
         if( serialNumberTD ) {
-          var checkbox = serialNumberTD.parent().find("input[type=checkbox]");
+          var checkbox = serialNumberTD.parent().find(":checkbox");
           checkbox.checked = !checkbox.checked;
 
           if( $(message).find(':contains(' + info["Serial Number"] + ')').length == 0 ) {
