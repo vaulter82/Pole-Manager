@@ -27,6 +27,8 @@
   var initializeButton = document.getElementById("initialize_scan_button");
   var closeButton = document.getElementById("pole_manager_code_reader_close_button");
 
+  var timer = Date.now();
+
   initializeButton.onclick = init;
   closeButton.onclick = dinit;
 
@@ -41,7 +43,7 @@
 
   function tick() {
     if( video.readyState === video.HAVE_ENOUGH_DATA && !video.paused ) {
-      $('body > :not(#pole_manager_code_reader_container)').hide();
+      $('body > :not(#pole_manager_code_reader_container)').attr("display", "none");
 
       container.style.display = "initial";
       canvasElement.height = video.videoHeight;
@@ -51,7 +53,9 @@
       var imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
       var code = jsQR(imageData.data, imageData.width, imageData.height);
 
-      if( code ) {
+      if( code && timer + 4000 < Date.now() ) {
+        timer = Date.now();
+
         drawLine(code.location.topLeftCorner, code.location.topRightCorner, "#FF3B58");
         drawLine(code.location.topRightCorner, code.location.bottomRightCorner, "#FF3B58");
         drawLine(code.location.bottomLeftCorner, code.location.bottomRightCorner, "#FF3B58");
@@ -71,9 +75,11 @@
           var checkbox = serialNumberTD.parent().find(":checkbox").first();
           checkbox.attr("checked", !checkbox.attr("checked"));
 
-          if( $(message).find(':contains(' + info["Serial Number"] + ')').length == 0 ) {
-            $(message).append('<p>' + info["Length"] + '    ' + info["Weight"] + '    ' + info["Flex"] + '</p>'); //make message into table?
-          } // else remove pole from list
+          if( $(message).find('#' + info["Serial Number"]).length == 0 ) {
+            $(message).append('<p id="' + info["Serial Number"] + '">' + info["Length"] + '    ' + info["Weight"] + '    ' + info["Flex"] + '</p>'); //make message into table?
+          } else {
+            $(message).find('#' + info["Serial Number"]).remove();
+          }
         }
       } else {
 
@@ -81,7 +87,7 @@
     } else {
       container.style.display = "none";
 
-      $('body > :not(#pole_manager_code_reader_container)').show();
+      $('body > :not(#pole_manager_code_reader_container)').attr("display", "");
     }
 
     requestAnimationFrame(tick);
