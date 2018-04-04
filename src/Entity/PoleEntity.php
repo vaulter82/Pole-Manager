@@ -257,7 +257,7 @@ class PoleEntity extends ContentEntityBase implements PoleEntityInterface {
     $fields['serial_number'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Serial Number'))
       ->setDescription(t('The serial number of the Pole. Should be unique.'))
-      ->setPropertyConstraints('value', array('UniqueField' => null))
+      ->addConstraint('UniqueField')
       ->setSettings(array(
         'default_value' => '',
         'max_length' => 16,
