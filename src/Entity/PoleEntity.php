@@ -257,6 +257,7 @@ class PoleEntity extends ContentEntityBase implements PoleEntityInterface {
     $fields['serial_number'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Serial Number'))
       ->setDescription(t('The serial number of the Pole. Should be unique.'))
+      ->setPropertyConstraints('value', array('Unique' => true))
       ->setSettings(array(
         'default_value' => '',
         'max_length' => 16,
@@ -314,7 +315,7 @@ class PoleEntity extends ContentEntityBase implements PoleEntityInterface {
       ))
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
-    
+
     $fields['checkout_date'] = BaseFieldDefinition::create('timestamp')
       ->setLabel(t('Checkout Date'))
       ->setDisplayConfigurable('form', TRUE)
