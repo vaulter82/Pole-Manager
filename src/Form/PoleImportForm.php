@@ -48,7 +48,7 @@ class PoleImportForm extends FormBase {
 
     $fhandle = fopen($uri, 'r');
     $result = fread($fhandle, filesize($uri));
-    $results = split('\n', $result);
+    $results = explode('\n', $result);
 
     drupal_set_message(t("Found something! {$results[0]}"), 'status');
 
