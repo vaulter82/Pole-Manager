@@ -29,6 +29,8 @@ class PoleImportForm extends FormBase {
       'file_validate_extensions' => array(
         'csv',
       ),
+      false,
+      0,
     ));
 
     if( $file ) {
