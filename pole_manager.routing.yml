@@ -11,3 +11,10 @@ pole_manager.checkin_confirm_form:
     _form: '\Drupal\pole_manager\Form\CheckInConfirmForm'
   requirements:
     _permission: 'administer pole entity entities'
+
+pole_manager.import_from_file:
+  path: '/poles/import'
+  defaults:
+    _form: '\Drupal\pole_manager\Form\PoleImportForm'
+  requirements:
+    _permission: 'administer pole entity entities'
