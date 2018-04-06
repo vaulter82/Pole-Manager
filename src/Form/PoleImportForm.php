@@ -29,8 +29,6 @@ class PoleImportForm extends FormBase {
       'file_validate_extensions' => array(
         'csv',
       ),
-      false,
-      0,
     ));
 
     if( $file ) {
@@ -46,7 +44,7 @@ class PoleImportForm extends FormBase {
 
     $form_state->unsetValue('file');
 
-    $uri = $file->absolutePath();
+    $uri = $file[0]->absolutePath();
 
     $fhandle = fopen($uri, 'r');
     $result = fread($fhandle, filesize($uri));
