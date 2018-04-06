@@ -32,7 +32,7 @@ class PoleImportForm extends FormBase {
     ));
 
     if( $file ) {
-      $form_state['storage']['file'] = $file;
+      $form_state->setValue('file', $file);
     } else {
       $form_state->setErrorByName('file', t("Must be a .csv file"));
     }
@@ -40,9 +40,9 @@ class PoleImportForm extends FormBase {
 
   public function submitForm(array &$form, FormStateInterface $form_state)
   {
-    $file = $form_state['storage']['file'];
+    $file = $form_state->getValue('file');
 
-    unset($form_state['storage']['file']);
+    $form_state->unsetValue('file');
 
     $uri = $file->absolutePath();
 
