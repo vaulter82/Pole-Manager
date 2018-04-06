@@ -53,6 +53,6 @@ class PoleImportForm extends FormBase {
     drupal_set_message(t("Found something! {$results[0]}"), 'status');
 
     fclose($fhandle);
-    $file->delete();
+    $file[0]->delete();
   }
 }
