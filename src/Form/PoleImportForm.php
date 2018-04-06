@@ -34,7 +34,7 @@ class PoleImportForm extends FormBase {
     if( $file ) {
       $form_state['storage']['file'] = $file;
     } else {
-      form_set_error('file', t("Must be a .csv file"));
+      $form_state->setErrorByName('file', t("Must be a .csv file"));
     }
   }
 
