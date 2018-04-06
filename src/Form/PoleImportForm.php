@@ -44,7 +44,7 @@ class PoleImportForm extends FormBase {
 
     $form_state->unsetValue('file');
 
-    $uri = $file[0]->absolutePath();
+    $uri = $file[0]->getFileUri();
 
     $fhandle = fopen($uri, 'r');
     $result = fread($fhandle, filesize($uri));
