@@ -61,7 +61,15 @@ class PoleImportForm extends FormBase {
         $pole[$h] = $row[$i];
       }
 
-      PoleEntity::create($pole)->save();
+      PoleEntity::create([
+        'make' => $pole["Make"],
+        'length' => $pole["Length"],
+        'weight' => $pole["Weight"],
+        'flex' => $pole["Flex"],
+        'serial_number' => $pole["Serial Number"],
+        'model_number' => $pole["Model Number"],
+        'notes' => $pole["Notes"],
+      ])->save();
     }
 
     drupal_set_message(t("Found something! {$results[0]}"), 'status');
