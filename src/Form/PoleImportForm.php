@@ -50,7 +50,7 @@ class PoleImportForm extends FormBase {
     $fhandle = fopen($uri, 'r');
     $result = fread($fhandle, filesize($uri));
     $results = preg_split("/\r\n|\r|\n/", $result);
-    $headers = array_shift($results);
+    $headers = explode(",", array_shift($results));
 
     foreach ($results as $value) {
       $pole = [];
