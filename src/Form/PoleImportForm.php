@@ -4,7 +4,7 @@ namespace Drupal\pole_manager\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\pole_manager\Form\PoleEntityForm;
+use Drupal\pole_manager\Entity\PoleEntity;
 
 class PoleImportForm extends FormBase {
   public function getFormId() {
@@ -40,6 +40,7 @@ class PoleImportForm extends FormBase {
 
   public function submitForm(array &$form, FormStateInterface $form_state)
   {
+    $poles = [];
     $file = $form_state->getValue('file');
 
     $form_state->unsetValue('file');
@@ -49,6 +50,19 @@ class PoleImportForm extends FormBase {
     $fhandle = fopen($uri, 'r');
     $result = fread($fhandle, filesize($uri));
     $results = preg_split("/\r\n|\r|\n/", $result);
+    $headers = array_shift($results);
+
+    foreach ($results as $value) {
+      $pole = [];
+
+      foreach ($headers as $i => $h) {
+        $row = explode(",", $value);
+
+        $pole[$h] = $row[$i];
+      }
+
+      PoleEntity::create($pole)->save();
+    }
 
     drupal_set_message(t("Found something! {$results[0]}"), 'status');
 
