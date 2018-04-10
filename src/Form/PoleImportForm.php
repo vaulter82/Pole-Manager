@@ -54,10 +54,9 @@ class PoleImportForm extends FormBase {
 
     foreach ($results as $value) {
       $pole = [];
+      $row = explode(",", $value);
 
       foreach ($headers as $i => $h) {
-        $row = explode(",", $value);
-
         $pole[$h] = $row[$i];
       }
 
