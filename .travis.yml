@@ -17,6 +17,7 @@ install:
   - composer create-project drupal/drupal drupal
   - composer global require drush/drush:8.*
   - phpenv rehash
+  - ls
+  - cd drupal
   - mysql -e 'create database drupal;'
-  - drush si --db-url=mysql://root@localhost/drupal
-  - cd core
+  - drush si --db-url=mysql://root@localhost/drupal site-install standard install_configure_form.enable_update_status_module=NULL install_configure_form.enable_update_status_emails=NULL
