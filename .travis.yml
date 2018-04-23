@@ -23,3 +23,4 @@ install:
   - yes | drush si --db-url=mysql://root@localhost/drupal standard install_configure_form.enable_update_status_module=NULL install_configure_form.enable_update_status_emails=NULL
   - mv ../Pole-Manager modules/pole_manager
   - yes | drush en pole_manager
+  - cd core
