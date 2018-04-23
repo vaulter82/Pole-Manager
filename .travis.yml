@@ -18,8 +18,8 @@ install:
   - composer global require drush/drush:8.*
   - phpenv rehash
   - mv drupal ../drupal
-  - ls ..
+  - cd ../drupal
   - mysql -e 'create database drupal;'
   - yes | drush si --db-url=mysql://root@localhost/drupal site-install standard install_configure_form.enable_update_status_module=NULL install_configure_form.enable_update_status_emails=NULL
-  - echo "mv module to appropriate folder"
-  - echo "drush pm pole_manager"
+  - mv ../Pole-Manager modules/pole_manager
+  - yes | drush pm pole_manager
