@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\pole_manager\Kernel;
+namespace Drupal\Tests\pole_manager\Functional;
 
 use Drupal\Tests\BrowserTestBase;
 
