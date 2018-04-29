@@ -3,25 +3,18 @@ language: php
 php:
   - 5.6
   - 7.0
-  
+
 mysql:
-  database: drupal 
-  username: root 
+  database: drupal
+  username: root
   encoding: utf8
-  
-before_install: 
+
+before_install:
   - composer self-update
-  
-install: 
-  - export PATH="$HOME/.composer/vendor/bin:$PATH"
-  - composer create-project drupal/drupal drupal
-  - composer global require drush/drush:8.*
-  - phpenv rehash
-  - mv drupal ../drupal
-  - cd ../drupal
-  - mysql -e 'create database drupal;'
-  - yes | drush si --db-url=mysql://root@localhost/drupal standard install_configure_form.enable_update_status_module=NULL install_configure_form.enable_update_status_emails=NULL
-  - mv ../Pole-Manager modules/pole_manager
-  - yes | drush en pole_manager
-  
-script: ./core/scripts/run-tests.sh pole_manager
+
+install:
+  - cd .. && composer create-project drupal-composer/drupal-project:8.x-dev drupal --stability dev --no-interaction
+  - cp -R Pole-Manager/* drupal/modules/pole_manager/
+  - #TODO: create phpunit.xml from phpunit.xml.dist
+
+script: cd drupal/core && ../vendor/bin/phpunit ../modules/pole_manager/
