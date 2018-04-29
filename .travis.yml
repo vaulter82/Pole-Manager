@@ -4,20 +4,22 @@ php:
   - 5.6
   - 7.0
 
-mysql:
-  database: drupal
-  username: root
-  encoding: utf8
+env:
+  global:
+    - SIMPLETEST_DB=sqlite://yoda/devtest
+    - SIMPLETEST_BASE_URL="http://127.0.0.1:8080"
 
 before_install:
   - composer self-update
 
 install:
-  - cd .. && composer create-project drupal-composer/drupal-project:8.x-dev drupal --stability dev --no-interaction
-  - cd drupal/web && ls && tree
-  # mkdir drupal/modules/pole_manager && cp -R Pole-Manager/* drupal/modules/pole_manager/
-  # cd drupal/core && cp phpunit.xml.dist phpunit.xml
-  # sed 's/"SIMPLETEST_BASE_URL" value=""/"SIMPLETEST_BASE_URL" value="dev.local"/' phpunit.xml
-  # sed 's/"SIMPLETEST_DB" value=""/"SIMPLETEST_DB" value="mysql://yoda:obiwan@localhost/devtest"/' phpunit.xml
+  - composer create-project drupal-composer/drupal-project:8.x-dev drupal --stability dev --no-interaction
 
-#script: ../vendor/bin/phpunit --group pole_manager
+
+script:
+  - cd $TRAVIS_BUILD_DIR/drupal/web
+  - mkdir ./modules/pole_manager/ cp -R $TRAVIS_BUILD_DIR/Pole-Manager/* ./modules/pole_manager/
+  - ../vendor/bin/drush site-install --verbose --yes --db-url=sqlite://yoda/devtest
+  - ../vendor/bin/drush runserver $SIMPLETEST_BASE_URL &
+  - until curl -s $SIMPLETEST_BASE_URL; do true; done > /dev/null
+  - ../vendor/bin/phpunit -c core --group pole_manager
