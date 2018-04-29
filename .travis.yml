@@ -14,7 +14,9 @@ before_install:
 
 install:
   - cd .. && composer create-project drupal-composer/drupal-project:8.x-dev drupal --stability dev --no-interaction
-  - cp -R Pole-Manager/* drupal/modules/pole_manager/
-  - #TODO: create phpunit.xml from phpunit.xml.dist
+  - mkdir drupal/modules/pole_manager && cp -R Pole-Manager/* drupal/modules/pole_manager/
+  - cd drupal/core && cp phpunit.xml.dist phpunit.xml
+  - sed 's/"SIMPLETEST_BASE_URL" value=""/"SIMPLETEST_BASE_URL" value="dev.local"/' phpunit.xml
+  - sed 's/"SIMPLETEST_DB" value=""/"SIMPLETEST_DB" value="mysql://yoda:obiwan@localhost/devtest"/' phpunit.xml
 
-script: cd drupal/core && ../vendor/bin/phpunit ../modules/pole_manager/
+script: ../vendor/bin/phpunit --group pole_manager
