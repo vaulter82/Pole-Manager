@@ -6,7 +6,7 @@ use Drupal\Core\Entity\EntityManagerInterface;
 use Drupal\Core\Form\ConfirmFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
-use Drupal\user\PrivateTempStoreFactory;
+use Drupal\Core\TempStore\PrivateTempStoreFactory;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -14,19 +14,19 @@ class CheckInConfirmForm extends ConfirmFormBase {
   protected $poleInfo = [];
   protected $tempStoreFactory;
   protected $manager;
-  
+
   public function __construct(PrivateTempStoreFactory $temp_store_factory, EntityManagerInterface $manager) {
     $this->tempStoreFactory = $temp_store_factory;
     $this->storage = $manager->getStorage('pole_entity');
   }
-  
+
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('user.private_tempstore'),
+      $container->get('tempstore.private'),
       $container->get('entity.manager')
     );
   }
-  
+
   public function getFormId() {
     return 'checkin_confirm_form';
   }
@@ -34,19 +34,19 @@ class CheckInConfirmForm extends ConfirmFormBase {
   public function getDescription() {
     return '';
   }
-  
+
   public function getQuestion() {
     return 'Check-in poles';
   }
-  
+
   public function getCancelURL() {
     return new Url('system.admin_content');
   }
-  
+
   public function getConfirmText() {
     return t('Check-in');
   }
-  
+
   public function buildForm( array $form, FormStateInterface $form_state ) {
     $this->poleInfo = $this->tempStoreFactory->get('checkin_confirm_form')->get(\Drupal::currentUser()->id());
 
@@ -73,7 +73,7 @@ class CheckInConfirmForm extends ConfirmFormBase {
 
     return $form;
   }
-  
+
   public function submitForm( array &$form, FormStateInterface $form_state ) {
     if( $form_state->getValue('confirm') && !empty($this->poleInfo) ) {
       $poles = $this->storage->loadMultiple( array_keys($this->poleInfo) );
