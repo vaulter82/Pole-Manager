@@ -11,7 +11,7 @@ class PoleManagerPagesExistTest extends BrowserTestBase {
   protected static $modules = ['pole_manager'];
 
   public function testPoleCollectionPage() {
-    $account = $this->drupalCreateUser(['administer pole entity entities']);
+    $account = $this->drupalCreateUser(['access pole entity overview']);
     $this->drupalLogin($account);
 
     $this->drupalGet('poles/collection');
